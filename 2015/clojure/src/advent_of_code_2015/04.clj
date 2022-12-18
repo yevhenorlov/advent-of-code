@@ -11,7 +11,7 @@
 
 (import 'java.security.MessageDigest
         'java.math.BigInteger)
-(ns clojure-advent-2015.04
+(ns advent_of_code_2015.04
   (:gen-class))
 (def input "iwrupvqb")
 

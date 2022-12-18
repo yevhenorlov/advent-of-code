@@ -13,7 +13,7 @@
 
 ; All numbers in the elves' list are in feet. How many total square feet of wrapping paper should they order?
 
-(ns clojure-advent-2015.02
+(ns advent_of_code_2015.02
   (:gen-class)
   (:require [clojure.string :as string]))
 (def input (slurp "input02.txt"))

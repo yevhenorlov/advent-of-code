@@ -1,4 +1,4 @@
-# clojure-advent-2015
+# advent_of_code_2015
 
 FIXME: description
 
@@ -10,7 +10,7 @@ Download from http://example.com/FIXME.
 
 FIXME: explanation
 
-    $ java -jar clojure-advent-2015-0.1.0-standalone.jar [args]
+    $ java -jar advent_of_code_2015-0.1.0-standalone.jar [args]
 
 ## Options
 
@@ -25,7 +25,9 @@ FIXME: listing of options this app accepts.
 ...
 
 ### Any Other Sections
+
 ### That You Think
+
 ### Might be Useful
 
 ## License

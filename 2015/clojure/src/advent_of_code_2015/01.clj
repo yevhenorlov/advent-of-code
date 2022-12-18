@@ -24,7 +24,7 @@
 
 ; To what floor do the instructions take Santa?
 
-(ns clojure-advent-2015.01
+(ns advent_of_code_2015.01
   (:gen-class)
   (:require [clojure.string :as string]))
 (def input (slurp "input01.txt"))

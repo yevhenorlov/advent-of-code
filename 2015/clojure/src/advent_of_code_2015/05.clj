@@ -18,6 +18,6 @@
 
 ; How many strings are nice?
 
-(ns clojure-advent-2015.05
+(ns advent_of_code_2015.05
   (:gen-class))
 (def input (slurp "input05.txt"))

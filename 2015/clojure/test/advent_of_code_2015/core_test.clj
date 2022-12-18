@@ -1,6 +1,6 @@
-(ns clojure-advent-2015.core-test
+(ns advent_of_code_2015.core-test
   (:require [clojure.test :refer :all]
-            [clojure-advent-2015.core :refer :all]))
+            [advent_of_code_2015.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."

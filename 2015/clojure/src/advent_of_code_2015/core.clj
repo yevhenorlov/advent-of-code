@@ -1,4 +1,4 @@
-(ns clojure-advent-2015.core
+(ns advent_of_code_2015.core
   (:gen-class))
 
 (defn -main

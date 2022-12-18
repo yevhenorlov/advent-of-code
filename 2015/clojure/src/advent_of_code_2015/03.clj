@@ -12,7 +12,7 @@
 ;     ^>v< delivers presents to 4 houses in a square, including twice to the house at his starting/ending location.
 ;     ^v^v^v^v^v delivers a bunch of presents to some very lucky children at only 2 houses.
 
-(ns clojure-advent-2015.03
+(ns advent_of_code_2015.03
   (:gen-class)
   (:require [clojure.string :as s]))
 (def input (slurp "input03.txt"))
