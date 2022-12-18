@@ -31,10 +31,7 @@
 
 // To what floor do the instructions take Santa?
 
-use std::fs;
-
-pub fn s0101(path: &str) -> i32 {
-    let input = fs::read_to_string(path).expect("Can't read the file, check the path");
+pub fn s0101(input: &str) -> i32 {
     let mut floor = 0;
     for c in input.trim().chars() {
         match c {
@@ -61,8 +58,7 @@ pub fn s0101(path: &str) -> i32 {
 // What is the position of the character that causes Santa to first enter
 // the basement?
 
-pub fn s0102(path: &str) -> usize {
-    let input = fs::read_to_string(path).expect("Can't read the file, check the path");
+pub fn s0102(input: &str) -> usize {
     let mut floor = 0;
     for (i, c) in input.trim().chars().enumerate() {
         if floor < 0 {
