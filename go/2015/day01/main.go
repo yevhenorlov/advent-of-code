@@ -33,7 +33,7 @@ import (
 	"os"
 )
 
-func main() {
+func partOne() {
 	file, err := os.Open("input.txt")
 
 	if err != nil {
@@ -61,4 +61,56 @@ func main() {
 	}
 
 	fmt.Println("The final floor is:", floor)
+}
+
+/*
+--- Part Two ---
+Now, given the same instructions, find the position of the first character that causes him to enter the basement (floor -1). The first character in the instructions has position 1, the second character has position 2, and so on.
+
+For example:
+
+) causes him to enter the basement at character position 1.
+()()) causes him to enter the basement at character position 5.
+What is the position of the character that causes Santa to first enter the basement?
+*/
+
+func partTwo() {
+	file, err := os.Open("input.txt")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	reader := bufio.NewReader(file)
+	position := 1
+	floor := 0
+	for {
+		char, _, err := reader.ReadRune()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatal(err)
+		}
+		switch char {
+		case ')':
+			floor = floor - 1
+		case '(':
+			floor = floor + 1
+		default:
+			break
+		}
+		if floor < 0 {
+			fmt.Println("basement entered at position:", position)
+			return
+		}
+		position++
+	}
+
+	fmt.Println("Basement never entered, final floor:", floor)
+}
+
+func main() {
+	partOne()
+	partTwo()
 }
