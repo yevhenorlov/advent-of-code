@@ -97,7 +97,7 @@ func containsTwo(x string) bool {
 	return false
 }
 
-func getNiceList(input []string) []string {
+func getNiceListOne(input []string) []string {
 	niceList := []string{}
 	for _, line := range input {
 		if containsForbidden(line) {
@@ -112,16 +112,79 @@ func getNiceList(input []string) []string {
 
 func partOne() {
 	input := getInput()
-	niceList := getNiceList(input)
-	fmt.Println("nice list length is:", len(niceList))
+	niceList := getNiceListOne(input)
+	fmt.Println("part 1 nice list length is:", len(niceList))
 }
 
 /*
-PART 2 Task
+
+--- Part Two ---
+
+Realizing the error of his ways, Santa has switched to a better model of determining whether a string is naughty or nice. None of the old rules apply, as they are all clearly ridiculous.
+
+Now, a nice string is one with all of the following properties:
+
+It contains a pair of any two letters that appears at least twice in the string without overlapping, like xyxy (xy) or aabcdefgaa (aa), but not like aaa (aa, but it overlaps).
+It contains at least one letter which repeats with exactly one letter between them, like xyx, abcdefeghi (efe), or even aaa.
+For example:
+
+qjhvhtzxzqqjkmpb is nice because is has a pair that appears twice (qj) and a letter that repeats with exactly one letter between them (zxz).
+xxyxx is nice because it has a pair that appears twice and a letter that repeats with one between, even though the letters used by each rule overlap.
+uurcxstgmygtbstg is naughty because it has a pair (tg) but no repeat with a single letter between them.
+ieodomkazucvgmuy is naughty because it has a repeating letter with one between (odo), but no pair that appears twice.
+How many strings are nice under these new rules?
+
 */
 
+func containsTwoPairs(x string) bool {
+	if len(x) < 4 {
+		// out of bounds
+		return false
+	}
+	for i := range x {
+		if i+4 > len(x) {
+			// out of bounds
+			return false
+		}
+		pair := x[i : i+2]
+		for j := i; j+4 <= len(x); j++ {
+			if x[j+2:j+4] == pair {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func containsASandwich(x string) bool {
+	if len(x) < 3 {
+		return false
+	}
+	for i := range x {
+		if i+2 >= len(x) {
+			return false
+		}
+		if x[i] == x[i+2] {
+			return true
+		}
+	}
+	return false
+}
+
+func getNiceListTwo(input []string) []string {
+	niceList := []string{}
+	for _, line := range input {
+		if containsTwoPairs(line) && containsASandwich(line) {
+			niceList = append(niceList, line)
+		}
+	}
+	return niceList
+}
+
 func partTwo() {
-	//
+	input := getInput()
+	niceList := getNiceListTwo(input)
+	fmt.Println("part 2 nice list length is:", len(niceList))
 }
 
 func main() {

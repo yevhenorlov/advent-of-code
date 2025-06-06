@@ -35,7 +35,6 @@ func getInput() string {
 	scanner := bufio.NewScanner(file)
 	scanner.Scan()
 	return scanner.Text()
-
 }
 
 func getAnswerForPrefix(prefix string) (int, error) {
