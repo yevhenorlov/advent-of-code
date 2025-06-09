@@ -72,11 +72,11 @@ func getInput() []string {
 	return val
 }
 
-type grid struct {
+type grid1 struct {
 	value [][]bool
 }
 
-func (g *grid) Init() {
+func (g *grid1) Init() {
 	gr := make([][]bool, 1000)
 	for x, _ := range gr {
 		gr[x] = make([]bool, 1000)
@@ -87,7 +87,7 @@ func (g *grid) Init() {
 	g.value = gr
 }
 
-func (g *grid) RunInstructions(input []string) {
+func (g *grid1) RunInstructions(input []string) {
 	for _, line := range input {
 		instr := parseInstruction(line)
 		switch instr.Verb {
@@ -116,7 +116,7 @@ func (g *grid) RunInstructions(input []string) {
 
 }
 
-func (g *grid) CalcLights() int {
+func (g *grid1) CalcLights() int {
 	count := 0
 	for x := range g.value {
 		for y := range g.value[x] {
@@ -130,7 +130,7 @@ func (g *grid) CalcLights() int {
 
 func partOne() {
 	input := getInput()
-	g := grid{}
+	g := grid1{}
 	g.Init()
 	g.RunInstructions(input)
 	lights := g.CalcLights()
@@ -138,11 +138,86 @@ func partOne() {
 }
 
 /*
-PART 2 Task
+--- Part Two ---
+
+You just finish implementing your winning light pattern when you realize you mistranslated Santa's message from Ancient Nordic Elvish.
+
+The light grid you bought actually has individual brightness controls; each light can have a brightness of zero or more. The lights all start at zero.
+
+The phrase turn on actually means that you should increase the brightness of those lights by 1.
+
+The phrase turn off actually means that you should decrease the brightness of those lights by 1, to a minimum of zero.
+
+The phrase toggle actually means that you should increase the brightness of those lights by 2.
+
+What is the total brightness of all lights combined after following Santa's instructions?
+
+For example:
+
+turn on 0,0 through 0,0 would increase the total brightness by 1.
+toggle 0,0 through 999,999 would increase the total brightness by 2000000.
 */
+type grid2 struct {
+	value [][]int
+}
+
+func (g *grid2) Init() {
+	gr := make([][]int, 1000)
+	for x, _ := range gr {
+		gr[x] = make([]int, 1000)
+		for y, _ := range gr[x] {
+			gr[x][y] = 0
+		}
+	}
+	g.value = gr
+}
+
+func (g *grid2) RunInstructions(input []string) {
+	for _, line := range input {
+		instr := parseInstruction(line)
+		switch instr.Verb {
+		case "turn on":
+			for x := instr.FromX; x <= instr.ToX; x++ {
+				for y := instr.FromY; y <= instr.ToY; y++ {
+					g.value[x][y] += 1
+				}
+			}
+		case "turn off":
+			for x := instr.FromX; x <= instr.ToX; x++ {
+				for y := instr.FromY; y <= instr.ToY; y++ {
+					g.value[x][y] = max(g.value[x][y]-1, 0)
+				}
+			}
+		case "toggle":
+			for x := instr.FromX; x <= instr.ToX; x++ {
+				for y := instr.FromY; y <= instr.ToY; y++ {
+					g.value[x][y] += 2
+				}
+			}
+		default:
+			log.Fatal("unhnadled verb:", instr.Verb)
+		}
+	}
+
+}
+
+func (g *grid2) CalcLights() int {
+	count := 0
+	for x := range g.value {
+		for y := range g.value[x] {
+			count += g.value[x][y]
+		}
+	}
+	return count
+}
 
 func partTwo() {
-	//
+	input := getInput()
+	g := grid2{}
+	g.Init()
+	g.RunInstructions(input)
+	lights := g.CalcLights()
+	fmt.Println("total illumination value", lights)
 }
 
 func main() {
